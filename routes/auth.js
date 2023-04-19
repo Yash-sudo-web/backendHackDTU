@@ -2,7 +2,7 @@ const router = require("express").Router();
 const { User } = require("../models/loginGUI");
 const bcrypt = require("bcrypt");
 const Joi = require("joi");
-
+const jwt = require("jsonwebtoken");
 router.post("/", async (req, res) => {
 	try {
 		const { error } = validate(req.body);
@@ -21,7 +21,13 @@ router.post("/", async (req, res) => {
 			return res.status(401).send({ message: "Invalid Email or Password" });
 
 		const token = user.generateAuthToken();
-		res.status(200).send({ data: token, message: "logged in successfully" });
+		const decodedToken = jwt.decode(token);
+		const name = await User.findById(decodedToken._id);
+		const username = name.userName;
+		
+		res.status(200).send({ token, username, message: "logged in successfully" });
+
+		
 	} catch (error) {
 		console.log(error)
 		res.status(500).send({ message: "Internal Server Error" });
