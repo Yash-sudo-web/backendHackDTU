@@ -28,7 +28,7 @@ router.post("/", async (req, res) => {
       if (isPointInPolygon(point2, polygons[i])) {
         userLocationFound = true;
         if(i==0){
-          schedule="Recyclables: Monday :- 9:30AM Wednesday :- 1:00PM Friday :- 5:00PM NonRecyclables: Tuesday:10:00AM Thursday:2:00PM Saturday:6:00PM HazardousWaste: Monday:9:00AM Wednesday:1:00PM Friday:5:00PM OrganicWaste: Tuesday:10:00AM Thursday:2:00PM Saturday:6:00PM" }
+          schedule={Recyclables: {Monday : "9:30AM", Wednesday : "1:00PM", Friday : "5:00PM"}, NonRecyclables: {Tuesday:"10:00AM", Thursday:"2:00PM", Saturday:"6:00PM"}, HazardousWaste: {Monday:"9:00AM", Wednesday:"1:00PM", Friday:"5:00PM"}, OrganicWaste: {Tuesday:"10:00AM", Thursday:"2:00PM", Saturday:"6:00PM"}}}
         else if(i==1){
           schedule="heyy"
         }
